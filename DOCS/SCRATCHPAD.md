@@ -63,6 +63,8 @@
 - **Enhanced Sidebar**: Collapsible sidebar with integrated theme toggles
 - **Stream History Replay**: Automatic message history restoration on reconnection
 - **File Attachments**: Enhanced `ChatInput` to support all file types (Paperclip icon), fixing "weird box" UI glitch.
+- **Mermaid UI Update**: Added collapsible "shrink arrow" header to Mermaid diagrams, matching code snippet styling.
+- **Text-to-Speech (TTS)**: Native browser-based voice synthesis for assistant messages with "Read aloud" controls.
 
 ## ROADMAP (NEVER DELETE THIS CONTENT)
 
@@ -70,10 +72,12 @@
 - [x] **Neural Background**: Immersive particle network visualization (HTML5 Canvas).
 - [x] **Mermaid Diagrams**: Intelligent diagram generation and rendering with zoom/pan.
 - [x] **Mermaid Syntax Fixer**: Auto-correction for common syntax errors (quotes, semicolons).
+- [x] **Mermaid UI**: Collapsible diagram container with consistent styling.
 - [x] **Related Questions**: AI-suggested follow-up questions for conversation continuity.
 - [x] **Settings Modal**: Basic user personalization (name).
 - [x] **Markdown Artifacts**: Resizable side panel for code/preview.
 - [x] **File Attachments**: Support for generic file attachments in chat.
+- [x] **Text-to-Speech**: Read aloud assistant responses.
 
 ### LLM Provider Inspired Features (New)
 **Nous Research (Hermes 4 / Open Source)**
@@ -84,7 +88,7 @@
 - [ ] **Length Control**: Slider to control the verbosity/depth of the reasoning chain.
 
 **Minimax (Hailuo)**
-- [ ] **Real-Time Emotive Voice**: Integration of low-latency, emotionally expressive TTS for assistant voice.
+- [x] **Real-Time Emotive Voice**: Integration of low-latency, emotionally expressive TTS for assistant voice.
 - [ ] **Video Generation**: Command to generate short video clips from text descriptions (e.g., `/video a cat jumping`).
 - [ ] **Music Generation**: Command to generate short background music/audio clips.
 
@@ -96,7 +100,3 @@
 **DeepSeek (R1 / V3)**
 - [x] **Reasoning Chain Visualization**: Collapsible accordion to show the raw "Chain of Thought" steps before the final answer.
 - [ ] **Distilled Local Models**: Support for running smaller, distilled models (e.g., via WebLLM) locally in the browser.
-- [ ] **Cost/Token Counter**: Real-time display of token usage and estimated cost (even if $0 for us, good for awareness).
-
-**Cohere (Command R+)**
-- [ ] **RAG with In-Line Citations**: Precise `[1]` style citations linking to source documents/web search results.

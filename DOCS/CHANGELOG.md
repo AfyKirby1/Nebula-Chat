@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.11] - 2025-12-01
+
+### ✨ New Features
+- **Text-to-Speech (TTS)**:
+  - Added "Read aloud" capability for assistant messages.
+  - Integrated Web Speech API for native voice synthesis.
+  - Controls: Play, Stop, and Pulse animation during playback.
+  - Smart voice selection (prefers Google/Microsoft English voices).
+
 ## [0.1.10] - 2025-12-01
 
 ### ✨ New Features

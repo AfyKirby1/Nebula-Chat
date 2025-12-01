@@ -15,6 +15,7 @@ The project has reached a significant milestone (v0.1.9) with the introduction o
 - ✅ **Durable Streaming**: Redis-backed architecture for resilient message delivery.
 - ✅ **Theme System**: Dark/light mode with Christmas theme overlay.
 - ✅ **Persona System**: Specialized AI modes (Developer, Creative, Analyst, Standard).
+- ✅ **Voice Interaction**: Native Text-to-Speech for reading assistant responses.
 
 ## The "Why" (Value Proposition)
 

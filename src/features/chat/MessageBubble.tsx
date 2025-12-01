@@ -3,13 +3,14 @@ import ReactMarkdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { cn } from "@/lib/utils"
-import { Bot, User, Brain, ChevronDown, ChevronRight, Loader2, Eye, Code, FileText, Keyboard, MousePointerClick, Copy, RefreshCw, Sparkles, Edit2 } from "lucide-react"
+import { Bot, User, Brain, ChevronDown, ChevronRight, Loader2, Eye, Code, FileText, Keyboard, MousePointerClick, Copy, RefreshCw, Sparkles, Edit2, Network, Volume2, Square } from "lucide-react"
 import { useArtifact, Artifact } from "@/contexts/ArtifactContext"
 import { Button } from "@/components/ui/Button"
 import { Message } from "@/types/chat"
 import { motion, AnimatePresence } from "framer-motion"
 import { toast } from "sonner"
 import { Mermaid } from "@/components/Mermaid"
+import { useTextToSpeech, cleanMarkdown } from "@/hooks/useTextToSpeech"
 
 interface MessageBubbleProps {
   message: Message
@@ -62,8 +63,38 @@ const CodeBlock = ({ inline, className, children, openArtifact, isStreaming, ...
   }, [isStreaming, isArtifact]);
 
   if (isMermaid) {
-                 return <Mermaid chart={content} />
-              }
+    return (
+      <div className="my-4 rounded-lg border border-border bg-card shadow-sm overflow-hidden not-prose">
+        <div 
+          className="flex items-center justify-between px-4 py-2 bg-muted/50 border-b border-border/50 cursor-pointer hover:bg-muted/70 transition-colors"
+          onClick={() => setIsCollapsed(!isCollapsed)}
+        >
+           <div className="flex items-center gap-2">
+              <div className="text-muted-foreground transition-transform duration-200">
+                 {isCollapsed ? <ChevronRight size={14} /> : <ChevronDown size={14} />}
+              </div>
+              <div className="h-6 w-6 rounded bg-primary/10 flex items-center justify-center text-primary">
+                 <Network size={14} />
+              </div>
+              <span className="text-xs font-medium text-muted-foreground uppercase">Diagram</span>
+           </div>
+        </div>
+        <AnimatePresence>
+          {!isCollapsed && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="overflow-hidden bg-background p-4"
+            >
+               <Mermaid chart={content} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    )
+  }
 
               // Handle file-like content in blocks (fixing "weird stuff" where filenames render as big code blocks)
               if (!inline && (!language || language === 'text') && isFileLike(content)) {
@@ -199,6 +230,7 @@ export const MessageBubble = React.memo(function MessageBubble({ message, onQues
   const isUser = message.role === "user"
   const [isThinkingOpen, setIsThinkingOpen] = React.useState(true)
   const { openArtifact } = useArtifact()
+  const { speak, cancel, isSpeaking } = useTextToSpeech()
 
   // Automatically open thinking if it's streaming
   React.useEffect(() => {
@@ -218,10 +250,28 @@ export const MessageBubble = React.memo(function MessageBubble({ message, onQues
 
   const markdownComponents = React.useMemo(() => ({
     pre({ children }: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
-      return <>{children}</>
+      // The pre component receives the code element as a child
+      // We intercept it to render our Block Code UI
+      if (React.isValidElement(children)) {
+        const { children: codeContent, className, ...rest } = children.props as any;
+        return (
+          <CodeBlock 
+            inline={false} 
+            className={className} 
+            openArtifact={openArtifact} 
+            isStreaming={message.isStreaming}
+            {...rest}
+          >
+            {codeContent}
+          </CodeBlock>
+        );
+      }
+      return <>{children}</>;
     },
     code(props: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
-      return <CodeBlock {...props} openArtifact={openArtifact} isStreaming={message.isStreaming} />
+      // The code component is used for inline code
+      // (Block code is handled by pre above)
+      return <CodeBlock inline={true} {...props} openArtifact={openArtifact} isStreaming={message.isStreaming} />
     },
     strong({ children, ...props }: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
         const textContent = String(children).trim().toLowerCase();
@@ -359,6 +409,18 @@ export const MessageBubble = React.memo(function MessageBubble({ message, onQues
         )}
         {!isUser && !message.isStreaming && message.content && (
            <div className="flex items-center justify-end gap-2 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 px-1">
+              <Button
+                variant="ghost"
+                size="icon"
+                className={cn(
+                  "h-6 w-6 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-full",
+                  isSpeaking && "text-primary animate-pulse bg-primary/10"
+                )}
+                onClick={() => isSpeaking ? cancel() : speak(cleanMarkdown(message.content))}
+                title={isSpeaking ? "Stop reading" : "Read aloud"}
+              >
+                {isSpeaking ? <Square size={12} fill="currentColor" /> : <Volume2 size={14} />}
+              </Button>
               <Button
                 variant="ghost"
                 size="icon"
