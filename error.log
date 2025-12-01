@@ -1,0 +1,2 @@
+forward-logs-shared.ts:95 [HMR] connected
+about:srcdoc:172 Uncaught SecurityError: Failed to read the 'localStorage' property from 'Window': The document is sandboxed and lacks the 'allow-same-origin' flag.
