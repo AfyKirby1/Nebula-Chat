@@ -1,6 +1,6 @@
 # Scratchpad
 
-**Last Updated**: 2025-01-27  
+**Last Updated**: 2025-12-01
 **Purpose**: Continuous reference and notes (never delete, only compact old updates)
 
 ## Current Project State
@@ -62,6 +62,7 @@
 - **Redis Durable Streaming**: Messages persist through disconnects using Redis Streams + Pub/Sub
 - **Enhanced Sidebar**: Collapsible sidebar with integrated theme toggles
 - **Stream History Replay**: Automatic message history restoration on reconnection
+- **File Attachments**: Enhanced `ChatInput` to support all file types (Paperclip icon), fixing "weird box" UI glitch.
 
 ## ROADMAP (NEVER DELETE THIS CONTENT)
 
@@ -72,6 +73,7 @@
 - [x] **Related Questions**: AI-suggested follow-up questions for conversation continuity.
 - [x] **Settings Modal**: Basic user personalization (name).
 - [x] **Markdown Artifacts**: Resizable side panel for code/preview.
+- [x] **File Attachments**: Support for generic file attachments in chat.
 
 ### LLM Provider Inspired Features (New)
 **Nous Research (Hermes 4 / Open Source)**
@@ -98,22 +100,3 @@
 
 **Cohere (Command R+)**
 - [ ] **RAG with In-Line Citations**: Precise `[1]` style citations linking to source documents/web search results.
-- [ ] **Multi-Step Tool Use**: Autonomous agent mode that can plan and execute sequences (Search -> Read -> Summarize).
-- [ ] **Connectors**: Pre-built integrations for Google Drive, Notion, Slack (RAG sources).
-
-### General Enhancements
-- [ ] **Voice Mode**: Web Speech API integration for voice input/output.
-- [ ] **Vector Memory**: Local vector store (`idb`) for long-term memory of user preferences.
-- [ ] **Plugin System**: Standardized interface for external tools.
-- [ ] **Mobile App**: PWA manifest and service worker.
-- [ ] **Collaborative Mode**: WebSockets for multiplayer chat sessions.
-- [ ] **Canvas Editor**: Drag-and-drop editor for Mermaid diagrams.
-
----
-
-*Note: Old entries should be compacted but preserved for historical reference*
-
-### Debug Log
-- **Hydration Mismatch Fix**: Fixed `useSpeechToText` hook to correctly handle server-side rendering by initializing `isSupported` to `false` and updating it in `useEffect`. This resolves the hydration error caused by `typeof window` checks during initial render.
-- **Redis Connection Fix**: Implemented `MemoryRedis` fallback in `src/lib/redis.ts`. If `REDIS_URL` is not set, the application now uses an in-memory store for chat streaming instead of failing to connect to localhost. This makes the app work out-of-the-box without Redis.
-- **ChatInput Hydration Fix**: Added `suppressHydrationWarning` to the file input in `ChatInput.tsx` to prevent hydration errors caused by browser extensions (e.g., Retriever) injecting attributes like `rtrvr-role`.

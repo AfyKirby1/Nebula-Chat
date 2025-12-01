@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.10] - 2025-12-01
+
+### ✨ New Features
+- **Universal File Attachments**:
+  - Expanded file upload support to all file types (not just images).
+  - Replaced generic image icon with a versatile "Paperclip" icon.
+  - Added distinct visual previews for non-image files (File icon with name).
+  - Preserved image preview functionality for image files.
+
+### 🐛 Fixed
+- **Chat Input Layout**:
+  - Resolved "weird box" layout glitch caused by the native file input element affecting spacing.
+  - Enforced `display: none` on the native file input to ensure invisible but functional operation.
+
 ## [0.1.9] - 2025-01-27
 
 ### 📚 Documentation & Repository
