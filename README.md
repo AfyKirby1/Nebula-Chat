@@ -1,7 +1,7 @@
 # Nebula Chat (v0.1)
 
 ![License](https://img.shields.io/badge/license-Private-red.svg)
-![Version](https://img.shields.io/badge/version-0.1.9-blue.svg)
+![Version](https://img.shields.io/badge/version-0.1.12-blue.svg)
 ![Status](https://img.shields.io/badge/status-beta-orange.svg)
 
 A next-generation AI chat interface featuring "Thinking" models (Gemini 2.5/3.0), durable streaming, and an intelligent artifact workspace ("Nebula").
@@ -42,16 +42,44 @@ A next-generation AI chat interface featuring "Thinking" models (Gemini 2.5/3.0)
 
 ## Quick Start
 
-### Prerequisites
+### Option 1: Docker (Recommended for Production)
 
+**Prerequisites**: Docker and Docker Compose
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/AfyKirby1/Nebula-Chat.git
+   cd Nebula-Chat
+   ```
+
+2. **Set up environment variables**:
+   Create a `.env` file:
+   ```env
+   GOOGLE_API_KEY=your_api_key_here
+   REDIS_URL=redis://redis:6379
+   ```
+
+3. **Start with Docker Compose**:
+   ```bash
+   docker-compose up -d
+   ```
+
+4. **Access the application**:
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+See [DEPLOYMENT.md](./DOCS/DEPLOYMENT.md) for detailed Docker deployment instructions.
+
+### Option 2: Local Development
+
+**Prerequisites**:
 - Node.js 18+ installed
 - Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
 - Redis server (optional, but required for durable streaming)
 
-### Installation
-
 1. **Clone and install dependencies**:
    ```bash
+   git clone https://github.com/AfyKirby1/Nebula-Chat.git
+   cd Nebula-Chat
    npm install
    ```
 
@@ -79,6 +107,7 @@ For detailed architecture and design decisions, see the [Documentation](./DOCS/)
 - [SUMMARY.md](./DOCS/SUMMARY.md) - Project overview and status
 - [CHANGELOG.md](./DOCS/CHANGELOG.md) - Version history
 - [SBOM.md](./DOCS/SBOM.md) - Dependencies and security
+- [DEPLOYMENT.md](./DOCS/DEPLOYMENT.md) - Docker deployment guide
 
 ## Development
 

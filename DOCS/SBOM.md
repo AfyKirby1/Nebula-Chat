@@ -21,7 +21,7 @@
 | ioredis | ^5.8.2 | MIT | Redis client for Node.js |
 | lucide-react | ^0.555.0 | ISC | Icon library |
 | mermaid | ^11.12.1 | MIT | Diagram generation library |
-| next | 16.0.5 | MIT | React framework |
+| next | 16.0.7 | MIT | React framework (patched for CVE-2025-66478) |
 | next-themes | ^0.4.6 | MIT | Theme management for Next.js |
 | react | 19.2.0 | MIT | UI library |
 | react-dom | 19.2.0 | MIT | React DOM renderer |
@@ -41,7 +41,7 @@
 | @types/react | ^19 | MIT | React type definitions |
 | @types/react-dom | ^19 | MIT | React DOM type definitions |
 | eslint | ^9 | MIT | JavaScript linter |
-| eslint-config-next | 16.0.5 | MIT | Next.js ESLint configuration |
+| eslint-config-next | 16.0.7 | MIT | Next.js ESLint configuration |
 | tailwindcss | ^4 | MIT | Utility-first CSS framework |
 | typescript | ^5 | Apache-2.0 | TypeScript compiler |
 

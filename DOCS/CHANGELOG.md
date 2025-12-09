@@ -2,7 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.12] - 2025-12-06
+
+### 🔒 Security Update (CRITICAL)
+- **CVE-2025-66478 Fix**: Updated Next.js from 16.0.5 to 16.0.7 to patch critical security vulnerability
+  - This addresses a CVSS 10.0 remote code execution vulnerability in React Server Components
+  - All users should upgrade immediately
+  - See [Next.js Security Advisory](https://nextjs.org/blog/CVE-2025-66478) for details
+  - Updated eslint-config-next to 16.0.7 to match
+
 ## [0.1.11] - 2025-12-01
+
+### 🐳 Docker Support
+- **Docker Configuration**:
+  - Added multi-stage Dockerfile for optimized production builds.
+  - Updated docker-compose.yml with app and Redis services.
+  - Created comprehensive deployment documentation.
+  - Added .dockerignore for efficient builds.
+  - Configured health checks for both services.
+  - Enabled standalone Next.js output for Docker.
 
 ### ✨ New Features
 - **Text-to-Speech (TTS)**:
